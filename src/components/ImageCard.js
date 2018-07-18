@@ -17,7 +17,13 @@ const ImageCard = (props) => {
         <div>
             {shuffledArray.map(data => {
                 return (
-                    <img className = 'images' key = {data.id} id = {data.id} onClick = {() =>props.handleIncrement(data.id)} src= {data.image} alt= {data.name} />
+                    <img className = 'images' 
+                        key = {data.id} 
+                        id = {data.id} 
+                        onClick = { () =>props.checkClicked(data.id) } 
+                        src= {data.image} 
+                        alt= {data.name}
+                    />
                     )
                 })}
         </div>
