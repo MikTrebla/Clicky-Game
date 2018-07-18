@@ -1,6 +1,7 @@
 {
   "name": "clicky-game",
   "version": "0.1.0",
+  "homepage": "https://miktrebla.github.io/Clicky-Game/",
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
