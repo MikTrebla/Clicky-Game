@@ -21,7 +21,7 @@ class Counter extends Component {
             item === id
         )
        
-        if (this.state.count < 8) {
+        if (this.state.count < 12) {
             if (filtered.length === 0) {
                 this.setState({
                     image:[...arrayImage, id]                    
@@ -37,7 +37,7 @@ class Counter extends Component {
                 })
             }
         } 
-        if (this.state.count === 8) {
+        if (this.state.count === 12) {
             if (filtered.length === 0) {
                 alert('You got them all! You win!');
                 this.setState({
