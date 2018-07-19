@@ -7,8 +7,8 @@ class Counter extends Component {
     state = {
         count:0,
         highScore:0,
-        image:[0]
-      };
+        image:[0],
+    };
     
     checkClicked = id => {
 
@@ -24,13 +24,15 @@ class Counter extends Component {
         if (this.state.count < 11) {
             if (filtered.length === 0) {
                 this.setState({
-                    image:[...arrayImage, id]                    
+                    correct:false,
+                    image:[...arrayImage, id]  ,
                 })
             }
             else if (filtered.length === 1) {
-                alert('Oops you pickd this one already! Game over!')
+                alert('Oops you picked this one already! Game over!')
                 this.setState({
                     image:[0],
+                    correct:true,
                     highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
                 }, () => {
                     this.setState({count : 0})
@@ -39,10 +41,10 @@ class Counter extends Component {
         } 
         if (this.state.count === 11) {
             if (filtered.length === 0) {
-                alert('You got them all! You win!');
                 this.setState({
+                    correct:false,
                     count: this.state.count+1,
-                    image : [0]
+                    image : [0],
                 }, () => {
                     this.setState({
                         highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
@@ -51,8 +53,9 @@ class Counter extends Component {
                 })
             }
             else if (filtered.length === 1) {
-                alert('Oops you pickd this one already! Game over!')
+                alert('Oops you picked this one already! Game over!')
                 this.setState({
+                    correct:true,
                     image:[0],
                     highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
                 }, () => {
@@ -65,15 +68,13 @@ class Counter extends Component {
     }
 
     render () {
-        
-        
         return (
             <div className = 'main-container container'>
                 <div id = 'header'>
-                    <h1>Memory Game:</h1>
-                    <h3>Adventure Time</h3>
+                    <h1>Adventure Time Memory Game</h1>
                 </div>
                 <br/>
+                <div className = 'message'>{ (this.state.count===0)? 'Click an image to start the game' :(this.state.count > 0) ? 'You guessed correctly!':'You guessed incorrectly!' }</div>
                 <div className = 'image-container row'>
                     <div className = 'col-md-2 instructions'>
                         <p>Click on an image to start the game.</p> 
@@ -89,7 +90,7 @@ class Counter extends Component {
                     <div className = 'col-md-2 scores'>
                         Current Score: {this.state.count}
                         <br/>
-                        High-Score: {this.state.highScore}
+                        High Score: {this.state.highScore}
                     </div>
                 </div>
                 
