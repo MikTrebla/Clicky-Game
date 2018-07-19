@@ -1,8 +1,12 @@
 body {
     background: linear-gradient(rgba(255, 255, 255, .75), rgba(64, 187, 218, 0.75)), url("./background.jpg") no-repeat center center fixed;
     font-family: 'Montserrat', sans-serif;
-    padding: none
+    padding: none;
+    border:none;
+    margin: none;
+    background-size:100%
 }
+
 
 .images {
     height: 200px;
