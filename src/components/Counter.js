@@ -10,64 +10,58 @@ class Counter extends Component {
         image:[0]
       };
     
-    // handleIncrement = id =>{
-        // if (this.state.count === 9) {
-        //     this.setState({
-                // highScore : this.state.count,
-                // image :[0],
-            //     count: this.state.count +1
-            // })
-        // }
-        //  else 
-        //  if (this.state.count < 9){
-        //     this.checkClicked(id);
-        // }
-    // };
-    
     checkClicked = id => {
-        let arrayImage = this.state.image;
 
-        arrayImage.forEach(item => {
-            if (id !== item && this.state.count < 9){
-                if (this.state.count < 9) {
-                    let userArray = [...arrayImage,id];
-                    this.setState({
-                        image : userArray,
-                        count : this.state.count + 1
-                    })
-                }
-                
-                
-            
-            } else if (id === item && this.state.count < 9) {
-                alert('Oops. You clicked this twice!') 
+        this.setState({
+            count : this.state.count +1
+        })
+
+        let arrayImage = this.state.image;
+        let filtered = arrayImage.filter(item => 
+            item === id
+        )
+       
+        if (this.state.count < 8) {
+            if (filtered.length === 0) {
                 this.setState({
-                    highScore :(this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
+                    image:[...arrayImage, id]                    
+                })
+            }
+            else if (filtered.length === 1) {
+                alert('Oops you pickd this one already! Game over!')
+                this.setState({
+                    image:[0],
+                    highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
+                }, () => {
+                    this.setState({count : 0})
+                })
+            }
+        } 
+        if (this.state.count === 8) {
+            if (filtered.length === 0) {
+                alert('You got them all! You win!');
+                this.setState({
+                    count: this.state.count+1,
                     image : [0]
                 }, () => {
                     this.setState({
-                        image:[0],
+                        highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
+                        count : 0
+                    })
+                })
+            }
+            else if (filtered.length === 1) {
+                alert('Oops you pickd this one already! Game over!')
+                this.setState({
+                    image:[0],
+                    highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore,
+                }, () => {
+                    this.setState({
                         count:0
                     })
                 })
             }
-            //  else if (this.state.count ===8 && id!==item) {
-            //     alert('You Win!');
-            //     this.setState({
-            //         image:[0],
-            //         count :0,
-            //         highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore
-            //     })
-            // } else if (this.state.count ===9 && id===item) {
-            //     alert('You Lose');
-            //     this.setState({
-            //         image:[0],
-            //         count :0,
-            //         highScore : (this.state.count > this.state.highScore) ? this.state.count : this.state.highScore
-            //     })
-            // }
-        })
-         
+        }
     }
 
     render () {
@@ -81,18 +75,18 @@ class Counter extends Component {
                 </div>
                 <br/>
                 <div className = 'image-container row'>
-                    <div className = 'col-md-3 instructions'>
+                    <div className = 'col-md-2 instructions'>
                         <p>Click on an image to start the game.</p> 
                         <p>To win, you must choose all the pictures only once!</p>
                     </div>
-                    <div className = 'col-md-6 image-div'>
+                    <div className = 'col-md-8 image-div'>
                         <ImageCard 
                             clicked = {this.state.isClicked}
                             image = {images} 
                             checkClicked={this.checkClicked}
                         />
                     </div>
-                    <div className = 'col-md-3 scores'>
+                    <div className = 'col-md-2 scores'>
                         Current Score: {this.state.count}
                         <br/>
                         High-Score: {this.state.highScore}

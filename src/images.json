@@ -36,5 +36,17 @@
         "id":9,
         "name" : "Gunther",
         "image" : "./images/Gunther.gif"
+    },{
+        "id":10,
+        "name" : "lsp",
+        "image" : "./images/lsp.gif"
+    },{
+        "id":11,
+        "name" : "PB",
+        "image" : "./images/bubblegum.gif"
+    },{
+        "id":12,
+        "name" : "Lemongrab",
+        "image" : "./images/lemongrab.gif"
     }
 ]
